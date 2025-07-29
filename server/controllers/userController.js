@@ -11,9 +11,9 @@ export const signup =async (req, res)=>{
         if(!fullName || !email || !password || !bio){
             return res.json({success: false, message: "Missing Details"})
         }
-        const User = await User.findOne({email});
 
-        if(User){
+        const user = await User.findOne({email});
+        if(user){
             return res.json({success: false, message: "Account already exists"})
         }
 
@@ -21,7 +21,7 @@ export const signup =async (req, res)=>{
         const hashedPassword = await bcrypt.hash(password, salt);
 
         const newUser = await User.create({
-            fullName, email, password: hashedPassword, bio
+            fullName, email, password: hashedPassword, bio,
         });
 
         const token = generateToken(newUser._id)
