@@ -11,7 +11,7 @@ import { Server } from "socket.io";
 const app = express();
 const server = http.createServer(app)
 
-// Initialize socket.io setup
+// Initialize socket.io server
 export const io = new Server(server, {
     cors: {origin: "*"}
 })

@@ -1,10 +1,10 @@
 import Message from "../models/Message.js";
 import User from "../models/User.js";
 import cloudinary from "../library/cloudinary.js";
-import { io,userSocketMap } from "../server.js";
+import { io, userSocketMap } from "../server.js";
 
 // Get all users except the logged in user
-export const getUsersForSidebar = async ()=>{
+export const getUsersForSidebar = async (req, res)=>{
     try {
         const userId = req.user._id;
         const filteredUsers =  await User.find({_id: {$ne: userId}}).select("-password");
@@ -64,7 +64,7 @@ export const markMessageAsSeen = async (req, res)=>{
 export const sendMessage = async (req, res)=>{
     try {
         const {text, image} = req.body;
-        const receiverId = req.params.id;
+        const receiverId = req.params._id;
         const senderId = req.user._id;
 
         let imageUrl;
