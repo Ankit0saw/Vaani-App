@@ -1,13 +1,16 @@
 import React, { useContext, useEffect, useState } from 'react'
 import assets from '../assets/assets'
+import { useNavigate } from 'react-router-dom'
 import { ChatContext } from '../../context/ChatContext'
 import { AuthContext } from '../../context/AuthContext'
 
 const RightSidebar = () => {
 
   const {selectedUser, messages} = useContext(ChatContext) 
-  const {logout, onlineUsers} =useContext(AuthContext)
+  const {logout, onlineUsers} = useContext(AuthContext)
   const [msgImages, setMsgImages] = useState([])
+  const navigate = useNavigate();
+  
 
   // Get all the images from the messages and set them to state
   useEffect(()=>{
@@ -42,10 +45,16 @@ const RightSidebar = () => {
         </div>
       </div>
 
-        <button onClick={()=>logout()} 
-          className='absolute bottom-5 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-purple-400 to-violet-600 text-white border-none font-light py-2 px-20 rounded-full cursor-pointer'>
-          Logout
-        </button>
+        <div className='flex lg:flex-row sm:flex-col md:gap-y-1 items-center gap-x-4 absolute bottom-5 left-1/2 -translate-x-1/2'>
+          <button onClick={()=>navigate('/profile')}
+            className='bg-gradient-to-r from-purple-400 to-violet-600 text-white border-none font-light py-2 px-8 rounded-full cursor-pointer'>
+            Profile
+          </button>
+          <button onClick={()=>logout()}
+            className='bg-gradient-to-r from-purple-400 to-violet-600 text-white border-none font-light py-2 px-8 rounded-full cursor-pointer'>
+            Logout
+          </button>
+        </div>
     </div>
   )
 }
