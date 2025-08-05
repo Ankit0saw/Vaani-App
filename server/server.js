@@ -40,7 +40,7 @@ io.on("connection", (socket)=>{
 
 
 // Middleware setup
-app.use(express.json({limit: "4mb"}));
+app.use(express.json({limit: "50mb"}));
 app.use(cors());
 
 // Routes setup
@@ -48,15 +48,9 @@ app.use("/api/status", (req,res)=> res.send("Server is live"));
 app.use("/api/auth", userRouter);
 app.use("/api/messages", messageRouter)
 
-// Connect to MongoDB
-await connectDB();
 
-
-if(process.env.NODE_ENV !== "production"){
-    const PORT = process.env.PORT || 5000;
-    server.listen(PORT, ()=> console.log("Server is running on PORT: " + PORT));
-}
-
-
-// Export server for Vercel
-export default server;
+const PORT = process.env.PORT || 5000;
+server.listen(PORT, '0.0.0.0', ()=> {
+    connectDB();    // Connect to Database after server starts
+    console.log(`Server is running on PORT:  ${PORT}`)
+});
