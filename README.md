@@ -2,7 +2,7 @@
 A chat application designed to securely exchange messages with your loved ones.
 
 🔗 **Live Preview**  
-[Click here to visit Vaani](https://vaani-app-xi.vercel.app/)
+[Click here to visit Vaani](https://vaani-app.onrender.com/)
 
 **Vaani** is a modern real-time chat and profile-based web application that lets users connect through messaging and personal expression. From authentication to real-time conversations, Vaani is built to be fast, clean, and intuitive.
 
